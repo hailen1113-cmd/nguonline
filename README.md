@@ -28,3 +28,26 @@ Hình được tạo bằng công cụ imagegen tích hợp, lấy ảnh thiết
 
 Asset mới `bed-actions.png` được tạo bằng imagegen tích hợp, tham chiếu `beds.png`. Prompt: atlas 2×2 nền trong suốt, cùng khung giường/góc nhìn/phong cách; ô trên trái nam ngồi mở mắt tựa gối, trên phải nữ ngồi mở mắt tựa gối, dưới trái nam nằm ngủ đắp chăn tím tới cằm, dưới phải nữ nằm ngủ đắp chăn hồng tới cằm; mỗi ô đúng một giường và một người, không chữ/lưới/nền.
 
+
+## Nối TikTok LIVE
+
+Cần Node.js 20+. Trong thư mục này chạy:
+
+```powershell
+npm install
+$env:TIKTOK_USERNAME="ten_creator_khong_co_dau"
+npm start
+```
+
+Mở game, vào ⚙ Bảng điều khiển, giữ địa chỉ `ws://127.0.0.1:8786/events` rồi bấm Kết nối. `TIKTOK_USERNAME` là username creator đang LIVE, không gồm `@`. Bridge chỉ nghe trên máy này; không cần đặt mật khẩu/cookie TikTok. Connector không chính thức; giao thức có thể thay đổi và ký kết nối mặc định dùng dịch vụ Euler Stream. Nếu cần API key, đặt `SIGN_API_KEY` trong terminal, không đưa key vào game hoặc repo. Chưa thể xác nhận sự kiện LIVE thật nếu chưa có username creator đang phát trực tiếp.
+
+## Flow LIVE đã bổ sung
+
+- Bridge mặc định nhận LIVE của @hailen1113. MEMBER → join → nhân vật đi tới giường và nằm ngủ. Nếu TikTok không gửi thông báo vào phòng, bình luận ngu/vao để nhận giường.
+- Phòng mới không có demo; dữ liệu demo cũ bị bỏ qua khi tải. Nút thêm demo vẫn có để thử riêng.
+- Mỗi userId có một nhân vật; tối đa 80 giường. Đầy phòng thì báo đầy, không xếp hàng.
+- Mặc định trả giường sau 30 phút không có tương tác; chọn 15/30/60/120 phút ở bảng điều khiển. Đây là thời gian không tương tác, không phải phát hiện chắc chắn người xem đã rời LIVE. Người xem yên lặng có thể hết hạn; bình luận ngu để vào lại. Nhân vật chủ máy được giữ lại.
+- Bridge thử nối TikTok lại sau 30 giây khi chưa LIVE/mất kết nối. Game nối lại bridge sau 3 giây và nhớ địa chỉ sau lần kết nối thành công. Bấm Ngắt kết nối dừng tự nối ở game.
+- Chạy START-TIKTOK.cmd, giữ username mặc định; mở game bằng HTTP và bấm Kết nối một lần. Các lần tải lại sau sẽ tự nối.
+- Đã kiểm tra logic game, luồng bình luận mô phỏng qua WebSocket và kết nối bridge thành công với LIVE @hailen1113. Chưa xác nhận một bình luận thật từ người xem điều khiển nhân vật.
+- Mở http://127.0.0.1:8765/?live=1 để game tự nối bridge. Máy chủ web phải phục vụ thư mục game tại cổng 8765. Nếu LIVE Studio từ chối Link cục bộ, dùng Window capture của cửa sổ Chrome, ẩn thanh trình duyệt và cắt viền để chỉ phát game.

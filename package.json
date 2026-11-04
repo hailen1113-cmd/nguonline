@@ -1,0 +1,7 @@
+{
+  "name": "nguonline-tiktok-bridge",
+  "private": true,
+  "type": "module",
+  "scripts": { "start": "node bridge.mjs" },
+  "dependencies": { "tiktok-live-connector": "^2.0.3", "ws": "^8.18.0" }
+}

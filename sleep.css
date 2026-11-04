@@ -10,3 +10,7 @@
 .bed.occupied.arriving .art{background-image:url(beds.png);background-position:0 0;animation:none}
 .bed.sitting .seated{display:none}
 footer button[aria-pressed='true']{border-color:#ffe89c;box-shadow:0 0 1cqw #e4b760aa,inset 0 0 1cqw #ffe6b044}
+
+/* A reserved bed stays visually empty until its walker arrives. */
+.bed.arriving .tag,.bed.arriving .gift,.bed.arriving .zzz,.bed.arriving .seated,.bed.arriving .bubble,.bed.arriving.mine:after{display:none}
+.bed.arriving .art{background-image:url(beds.png);background-position:0 0;animation:none}
